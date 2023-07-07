@@ -140,12 +140,11 @@ public class StringArrayUtils {
                 arrayAsList.add(array[i]);
             }
         }
-            String[] result = new String[arrayAsList.size()];
-        for (int j = 0; j < result.length; j++){
-            result[j] = arrayAsList.get(j);
-        }
-
-        return result;
+//            String[] result = new String[arrayAsList.size()];
+//        for (int j = 0; j < result.length; j++){
+//            result[j] = arrayAsList.get(j);
+//        }
+        return arrayAsList.toArray(new String[0]);
     }
 
     /**
@@ -185,8 +184,30 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+//        String[] array = {"a", "a", "a", "b", "c", "c", "a", "a", "d"};
+//        String[] expected = {"aaa", "b", "cc", "aa", "d"};
+
+        //Look through the array
+        //if there is a duplicate character
+        //add the characters together into one element.
+        List<String> newArray = new ArrayList<>(Arrays.asList(array));
+        List<String> packedArray = new ArrayList<>();
+
+        for(int i = 0; i < newArray.size() - 1; i++){
+         String theCharacter = newArray.get(i);
+         String theNextCharacter = newArray.get(i + 1);
+
+         if (theCharacter.charAt(0) == (theNextCharacter.charAt(0))){
+             newArray.set(i, theCharacter + theNextCharacter);
+             newArray.remove(theNextCharacter);
+             i--;
+            }
+        }
+
+
+
+
+
+        return newArray.toArray(new String[0]);
     }
-
-
 }
